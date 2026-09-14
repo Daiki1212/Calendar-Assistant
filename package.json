@@ -1,0 +1,28 @@
+{
+  "name": "calendar-assistant",
+  "author": "Daiki|Lukas",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daiki1212/Calendar-Assistant.git"
+  },
+  "type": "module",
+  "homepage": "https://github.com/Daiki1212/Calendar-Assistant#readme",
+  "dependencies": {
+    "discord.js": "^14.27.0",
+    "dotenv": "^17.4.2",
+    "ollama": "^0.6.3",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.1",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
