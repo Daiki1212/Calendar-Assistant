@@ -1,11 +1,13 @@
 import {Client, IntentsBitField, Partials, Events, Message, ChannelType} from "discord.js";
-import {DiscordBotConfigInterface} from "./interfaces/DiscordBotConfig.js";
+import {DiscordBotConfig} from "./DiscordBotConfig.js";
+import {Assistant} from "../application/Assistant.js";
 
 export class DiscordBot {
     private readonly client: Client
 
     constructor(
-        private readonly discordBotConfig: DiscordBotConfigInterface
+        private readonly discordBotConfig: DiscordBotConfig,
+        private readonly assistant: Assistant,
     ) {
         this.client = new Client({
             intents: [
@@ -68,6 +70,8 @@ export class DiscordBot {
             content: content,
         });
 
-        await message.reply("Hello World!");
+        const response = await this.assistant.handle(content);
+
+        await message.reply(response);
     }
 }
