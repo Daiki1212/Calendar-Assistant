@@ -26,15 +26,13 @@ export class DiscordBot {
 
     public async start(): Promise<void> {
         await this.client.login(this.discordBotConfig.token);
-
-        const daiki = await this.client.users.fetch(this.discordBotConfig.userId);
-        await daiki.send("Ich bin Bereit!");
     }
 
     private registerEvents(): void {
         this.client.once(
             Events.ClientReady,
-            (client) => {
+            async (client) => {
+                await this.handleReady()
                 console.log("Ready! Logged in", client.user.tag);
             }
         )
@@ -54,10 +52,17 @@ export class DiscordBot {
         )
     }
 
+    private async handleReady(): Promise<void> {
+        for (const userId of this.discordBotConfig.userId) {
+            const daiki = await this.client.users.fetch(userId);
+            await daiki.send("Ich bin Bereit!");
+        }
+    }
+
     private async handleMessage(message: Message): Promise<void> {
         if (
             (message.author.bot) ||
-            (message.author.id !== this.discordBotConfig.userId) ||
+            (message.author.id !in this.discordBotConfig.userId) ||
             (message.channel.type !== ChannelType.DM)
         ) return;
 

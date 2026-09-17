@@ -17,7 +17,7 @@ function getOptionalEnv(key: string, fallback: string): string {
 export const config = {
     discord: {
         token: getRequiredEnv('DISCORD_TOKEN'),
-        userId: getRequiredEnv('DISCORD_USER_ID'),
+        userId: getRequiredEnv('DISCORD_USER_ID').split(','),
     },
     ollama: {
         host: getOptionalEnv('OLLAMA_HOST', 'http://localhost:11434'),
